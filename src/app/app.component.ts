@@ -159,7 +159,7 @@ export class AppComponent {
       }
     }
     for (let n = 0; n < 10; n++) {
-      let flag = [0, 0];
+      let flag = [0, 0, 0];
       for (let i = 1; i < nodesY; i++) {
         for (let j = 1; j < nodesX; j++) {
           let x1 = lengthForNode[i][j].x1;
@@ -209,7 +209,7 @@ export class AppComponent {
           a3 = -1 * (x1 / y2 + y2 / x1);
           c1 = -1 * (x2 / y1 + y1 / x2);
           c3 = -1 * (x2 / y2 + y2 / x2);
-          this.answer[i][j] = this.roundNum(
+          this.answer[i][j] =
             (c -
               this.answer[i][j + 1] * a2 -
               this.answer[i][j - 1] * c2 -
@@ -219,35 +219,43 @@ export class AppComponent {
               this.answer[i - 1][j + 1] * a1 +
               this.answer[i + 1][j - 1] * c3 +
               this.answer[i + 1][j + 1] * a3) /
-              b2
-          );
+            b2;
           console.log('NEW NUMBER');
           console.log(`[${i}][${j}]`);
           // console.log('x1: ', x1);
           // console.log('x2: ', x2);
           // console.log('y1: ', y1);
           // console.log('y2: ', y2);
-          let forTest = this.roundNum(
+          let forTest =
             this.answer[i][j] * b2 +
-              this.answer[i][j + 1] * a2 +
-              this.answer[i][j - 1] * c2 +
-              this.answer[i - 1][j] * b1 +
-              this.answer[i + 1][j] * b3 -
-              this.answer[i - 1][j - 1] * c1 -
-              this.answer[i - 1][j + 1] * a1 -
-              this.answer[i + 1][j - 1] * c3 -
-              this.answer[i + 1][j + 1] * a3
-          );
-          flag[0] += this.roundNum(c);
+            this.answer[i][j + 1] * a2 +
+            this.answer[i][j - 1] * c2 +
+            this.answer[i - 1][j] * b1 +
+            this.answer[i + 1][j] * b3 -
+            this.answer[i - 1][j - 1] * c1 -
+            this.answer[i - 1][j + 1] * a1 -
+            this.answer[i + 1][j - 1] * c3 -
+            this.answer[i + 1][j + 1] * a3;
+          flag[0] += c;
           flag[1] += forTest;
-          console.log('c: ', this.roundNum(c));
+          flag[2]++;
+          console.log('c: ', c);
           console.log('answer: ', forTest);
         }
       }
-      let tester = flag[0] - flag[1];
-      if ((0 <= tester && tester <= 1) || (0 >= tester && tester >= -1)) {
+      let tester = (flag[0] - flag[1]) / flag[2];
+      if (
+        (0 < tester && tester <= 0.0001) ||
+        (0 > tester && tester >= -0.0001)
+      ) {
         console.log('n: ', n);
         break;
+      }
+    }
+
+    for (let i = 1; i < nodesY; i++) {
+      for (let j = 1; j < nodesX; j++) {
+        this.answer[i][j] = this.roundNum(this.answer[i][j]);
       }
     }
   }
