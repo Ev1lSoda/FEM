@@ -12,14 +12,14 @@ export class AppComponent {
 
   title = 'FEM';
   public inputController = {
-    a: 3,
-    b: 3,
-    c: 1,
-    d: 1,
-    deltaA: 0,
-    deltaB: 0,
-    deltaC: 0,
-    deltaD: 0,
+    a: 5,
+    b: 4,
+    c: 3,
+    d: 3,
+    deltaA: 2,
+    deltaB: 2,
+    deltaC: 2,
+    deltaD: 2,
     F: 1,
     G: 2,
   };
@@ -159,6 +159,7 @@ export class AppComponent {
       }
     }
     for (let n = 0; n < 10; n++) {
+      let flag = [0, 0];
       for (let i = 1; i < nodesY; i++) {
         for (let j = 1; j < nodesX; j++) {
           let x1 = lengthForNode[i][j].x1;
@@ -226,9 +227,7 @@ export class AppComponent {
           // console.log('x2: ', x2);
           // console.log('y1: ', y1);
           // console.log('y2: ', y2);
-          console.log('c: ', c);
-          console.log(
-            'answer: ',
+          let forTest = this.roundNum(
             this.answer[i][j] * b2 +
               this.answer[i][j + 1] * a2 +
               this.answer[i][j - 1] * c2 +
@@ -239,7 +238,16 @@ export class AppComponent {
               this.answer[i + 1][j - 1] * c3 -
               this.answer[i + 1][j + 1] * a3
           );
+          flag[0] += this.roundNum(c);
+          flag[1] += forTest;
+          console.log('c: ', this.roundNum(c));
+          console.log('answer: ', forTest);
         }
+      }
+      let tester = flag[0] - flag[1];
+      if ((0 <= tester && tester <= 1) || (0 >= tester && tester >= -1)) {
+        console.log('n: ', n);
+        break;
       }
     }
   }

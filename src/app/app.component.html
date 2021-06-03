@@ -2,7 +2,7 @@
   <div class="for-input">
     <h2>Введіть дані:</h2>
 
-    <form action="/action_page.php">
+    <form>
       <label for="a">a:</label><br />
       <input
         type="number"
@@ -31,28 +31,28 @@
         name="d"
         [(ngModel)]="inputController.d"
       /><br />
-      <label for="deltaA">deltaA:</label><br />
+      <label for="deltaA">&Delta;a:</label><br />
       <input
         type="number"
         id="deltaA"
         name="deltaA"
         [(ngModel)]="inputController.deltaA"
       /><br />
-      <label for="deltaB">deltaB:</label><br />
+      <label for="deltaB">&Delta;b:</label><br />
       <input
         type="number"
         id="deltaB"
         name="deltaB"
         [(ngModel)]="inputController.deltaB"
       /><br />
-      <label for="deltaC">deltaC:</label><br />
+      <label for="deltaC">&Delta;c:</label><br />
       <input
         type="number"
         id="deltaC"
         name="deltaC"
         [(ngModel)]="inputController.deltaC"
       /><br />
-      <label for="deltaD">deltaD:</label><br />
+      <label for="deltaD">&Delta;d:</label><br />
       <input
         type="number"
         id="deltaD"
@@ -73,12 +73,14 @@
         name="G"
         [(ngModel)]="inputController.G"
       /><br />
-      <input type="submit" value="Submit" (click)="onUpdate()" />
+      <input type="submit" value="Розрахувати!" (click)="onUpdate()" />
     </form>
   </div>
-  <table>
-    <tr *ngFor="let row of answer">
-      <td *ngFor="let one of row">{{ one }}</td>
-    </tr>
-  </table>
+  <div class="for-table">
+    <table>
+      <tr *ngFor="let row of answer">
+        <td *ngFor="let one of row">{{ one }}</td>
+      </tr>
+    </table>
+  </div>
 </div>
