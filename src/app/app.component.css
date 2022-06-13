@@ -7,6 +7,10 @@
   height: 95vh;
 }
 
+input[type="number"] {
+  width: 100%;
+}
+
 input[type="text"],
 select {
   width: 100%;
